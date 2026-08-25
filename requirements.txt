@@ -1,0 +1,18 @@
+# Core
+python-dotenv
+pydantic
+pydantic-settings
+
+# Document generation
+python-docx
+openpyxl
+
+# OCR & PDF
+pdf2image
+pytesseract
+paddleocr
+Pillow
+
+# Utilities
+requests
+rich
