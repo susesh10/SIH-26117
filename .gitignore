@@ -45,3 +45,8 @@ Thumbs.db
 
 # Jupyter
 .ipynb_checkpoints/
+venv/
+__pycache__/
+*.pyc
+outputs/*.docx
+temp_page_*.jpg

@@ -1,15 +1,18 @@
 import ollama
+from datetime import datetime
 
 def generate_approval_note(extracted_text: str) -> str:
+    today = datetime.now().strftime("%d %B %Y")
+
     prompt = f"""
 You are an assistant working in a petroleum refinery (MRPL style).
-Your task is to convert the given inspection findings into a formal Approval / Observation Note.
+Convert the given inspection findings into a formal Approval / Observation Note.
 
 Follow this exact structure:
 
 Title: Inspection Observation / Approval Note
-Date: [Today's Date]
-Reference: [Generate a simple reference number]
+Date: {today}
+Reference: INS-{datetime.now().strftime("%Y%m%d")}-001
 
 1. Background / Context
 2. Key Findings
@@ -18,8 +21,8 @@ Reference: [Generate a simple reference number]
 5. Conclusion
 
 Use formal and professional language suitable for refinery documentation.
-Here are the raw findings:
 
+Raw findings:
 {extracted_text}
 """
 
@@ -33,7 +36,6 @@ Here are the raw findings:
     return response["message"]["content"]
 
 
-# --------- Testing with dummy text ---------
 if __name__ == "__main__":
     dummy_findings = """
     During routine inspection of Heat Exchanger HE-204 in CDU unit, 
