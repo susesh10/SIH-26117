@@ -32,6 +32,7 @@ Reference: {ref_no}
 5. Conclusion
 
 Rules:
+
 - Use formal professional language
 - Do not use markdown symbols like **, ###, etc.
 - Keep it concise
