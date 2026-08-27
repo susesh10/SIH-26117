@@ -1,25 +1,17 @@
-from paddleocr import PaddleOCR
+import pytesseract
 from pdf2image import convert_from_path
 from PIL import Image
 import os
 
-# Initialize PaddleOCR only once (this saves time)
-ocr_engine = PaddleOCR(use_angle_cls=True, lang='en', show_log=False)
-
 def extract_text_from_image(image_path: str) -> str:
-    """Extract text from a single image"""
-    result = ocr_engine.ocr(image_path, cls=True)
-    
-    text_lines = []
-    if result and result[0]:
-        for line in result[0]:
-            text_lines.append(line[1][0])
-    
-    return "\n".join(text_lines)
+    """Extract text from a single image using Tesseract"""
+    img = Image.open(image_path)
+    text = pytesseract.image_to_string(img)
+    return text.strip()
 
 
 def extract_text_from_pdf(pdf_path: str) -> str:
-    """Extract text from PDF by converting pages to images first"""
+    """Extract text from PDF by converting pages to images"""
     pages = convert_from_path(pdf_path, dpi=200)
     
     all_text = []
@@ -30,7 +22,6 @@ def extract_text_from_pdf(pdf_path: str) -> str:
         text = extract_text_from_image(temp_image)
         all_text.append(f"\n--- Page {i+1} ---\n{text}")
         
-        # Clean up temporary image
         if os.path.exists(temp_image):
             os.remove(temp_image)
     
