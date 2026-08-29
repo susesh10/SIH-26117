@@ -1,21 +1,16 @@
-# Overwrite requirements.txt with a clean version
-cat > requirements.txt << 'EOF'
 # Core
 ollama
-python-dotenv
-pydantic
-pydantic-settings
+gradio
 
 # Document Generation
 python-docx
 openpyxl
 
 # OCR & PDF
-paddleocr
+pytesseract
 pdf2image
 Pillow
-pymupdf
 
 # Utilities
+python-dotenv
 rich
-EOF
